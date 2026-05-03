@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { LogoutButton } from './LogoutButton';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -35,6 +36,7 @@ const Footer = () => {
                 <span className="text-[#A29487] text-[9px] md:text-[10px] font-medium tracking-widest uppercase">
                   Vila Marcela
                 </span>
+                <LogoutButton />
               </div>
             </Link>
 

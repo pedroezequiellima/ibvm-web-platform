@@ -8,7 +8,7 @@ const ministerios = [
   { id: 2, nome: 'Vila Jovem', imagem: '/adolescentes/TeensChacara2.jpg', instagram: 'https://www.instagram.com/vilajovem.ibvm/' },
   { id: 3, nome: 'Vila Teens', imagem: '/adolescentes/TeensChacara.jpg', instagram: 'https://www.instagram.com/vilateensibvm/' },
   { id: 4, nome: 'Vila Kids', imagem: '/infantil/MuitaCria.jpg', instagram: 'https://www.instagram.com/igrejabatistavilamarcela/' },
-  { id: 5, nome: 'Igreja', imagem: '/IBVM.png', instagram: 'https://www.instagram.com/igrejabatistavilamarcela/' },
+  { id: 5, nome: 'Igreja', imagem: '/IBVM.jpg', instagram: 'https://www.instagram.com/igrejabatistavilamarcela/' },
   { id: 6, nome: 'Rede de Casais', imagem: '/VilaA2.jpg', instagram: 'https://www.instagram.com/stories/highlights/17846562494657598/' },
 ];
 

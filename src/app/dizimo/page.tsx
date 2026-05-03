@@ -1,5 +1,5 @@
 'use client'
-import { Wind, Heart, MessageCircle, Phone, Image as ImageIcon } from 'lucide-react'
+import { Wind, Heart, Phone, Image as ImageIcon } from 'lucide-react'
 import Image from 'next/image'
 
 // Link do WhatsApp da Igreja (Substitua pelo número real)
@@ -56,7 +56,7 @@ export default function OfertasPage() {
                 <ImageIcon size={48} />
                 <span className="text-sm">Clique para ver o Banner</span>
               </div>
-               <Image src="/clima.png" alt="Banner Climatização" fill className="object-cover group-hover:scale-105 transition-transform" />
+               <Image src="/clima.jpg" alt="Banner Climatização" fill className="object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-all" />
             </div>
           </div>
@@ -76,7 +76,7 @@ export default function OfertasPage() {
             - object-cover evita que a foto fique "esticada".
             - group-hover dá o efeito de movimento ao passar o mouse.
             */}
-        <Image src="/lideresAção.jpg" alt="Ação Social IBVM" fill className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+        <Image src="/lideresacao.jpg" alt="Ação Social IBVM" fill className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
 
         {/* Overlay de gradiente para dar profundidade (Z-index 10) */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10 pointer-events-none" />

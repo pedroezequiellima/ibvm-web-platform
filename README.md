@@ -73,4 +73,4 @@ Bash
 npm run dev
 Acesse http://localhost:3000 no seu navegador.
 
-Desenvolvido com ☕ e dedicação por @pedroezequiel.dev.
+Desenvolvido com ☕ e dedicação por @pedroezequiel.dev
