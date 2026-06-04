@@ -60,7 +60,7 @@ const Navbar = () => {
       <nav 
         className={`fixed top-0 w-full z-[100] transition-all duration-500 px-6 md:px-12 flex items-center ${
           isHome 
-            ? (isScrolled ? 'bg-[#FCF9F6]/90 backdrop-blur-md shadow-md py-3' : 'bg-[#ffffff89] py-4') 
+            ? (isScrolled ? 'bg-[#FCF9F6]/90 backdrop-blur-md shadow-md py-3' : 'bg-[#ffffffce] py-4') 
             : 'bg-[#FCF9F6] shadow-md py-3'
         }`}
       >

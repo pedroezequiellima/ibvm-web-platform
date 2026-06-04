@@ -1,7 +1,5 @@
 import { initializeApp, getApps, type FirebaseOptions } from 'firebase/app';
-import { getAuth, browserLocalPersistence, GoogleAuthProvider } from 'firebase/auth';
-import { getStorage } from 'firebase/storage';
-import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY ?? '',
@@ -20,9 +18,5 @@ if (!firebaseConfig.apiKey || !firebaseConfig.projectId || !firebaseConfig.appId
 
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const auth = getAuth(app);
-void auth.setPersistence(browserLocalPersistence);
-const storage = getStorage(app);
-const db = getFirestore(app);
-const googleAuthProvider = new GoogleAuthProvider();
 
-export { auth, googleAuthProvider, storage, db };
+export { app, auth };

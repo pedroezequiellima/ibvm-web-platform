@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/lib/firebase/client';
 
 export function LogoutButton() {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,20 +11,24 @@ export function LogoutButton() {
 
   async function handleLogout() {
     setIsLoading(true);
+
     try {
+      await signOut(auth);
+
       const response = await fetch('/api/auth/logout', {
         method: 'POST',
       });
 
       if (!response.ok) {
-        throw new Error('Falha ao encerrar sessão.');
+        const errorText = await response.text();
+        throw new Error(`Falha ao limpar sessão no servidor: ${response.status} ${response.statusText} - ${errorText}`);
       }
 
       router.replace('/login');
     } catch (error) {
-      console.error('Logout erro:', error);
+      console.error('Erro ao fazer logout:', error);
       setIsLoading(false);
-      alert('Não foi possível fazer logout. Tente novamente.');
+      alert(`Não foi possível fazer logout. Motivo: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 
@@ -31,7 +37,7 @@ export function LogoutButton() {
       type="button"
       onClick={handleLogout}
       disabled={isLoading}
-      className="inline-flex items-center justify-center rounded-2xl border border-slate-700 bg-slate-800 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:border-slate-500 hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
+      className="inline-flex items-center justify-center rounded-2xl border border-[#D9C7B2] bg-transparent px-5 py-3 text-sm font-semibold text-[#5c4938] transition hover:bg-[#FCF9F6] hover:border-[#BFA88A] disabled:cursor-not-allowed disabled:opacity-60"
     >
       {isLoading ? 'Saindo...' : 'Logout'}
     </button>

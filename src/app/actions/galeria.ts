@@ -1,10 +1,8 @@
 'use server';
 
-import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
-import { adminAuth, adminDb, FIREBASE_SESSION_COOKIE_NAME } from '@/lib/firebase/admin';
-import { Timestamp } from 'firebase-admin/firestore';
+import clientPromise from '@/lib/mongodb';
 
 const galeriaSchema = z.object({
   titulo: z.string().min(3, 'Título deve ter pelo menos 3 caracteres').max(100, 'Título muito longo'),
@@ -13,25 +11,6 @@ const galeriaSchema = z.object({
 });
 
 async function createGaleriaEntry(formData: FormData) {
-  const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(FIREBASE_SESSION_COOKIE_NAME)?.value;
-
-  if (!sessionCookie) {
-    throw new Error('Sessão não encontrada. Faça login novamente.');
-  }
-
-  let decodedToken;
-  try {
-    decodedToken = await adminAuth.verifySessionCookie(sessionCookie, true);
-  } catch (error) {
-    console.error('Falha na verificação do cookie de sessão:', error);
-    throw new Error('Sessão inválida ou expirada. Faça login novamente.');
-  }
-
-  if (!decodedToken.uid) {
-    throw new Error('Usuário não autorizado.');
-  }
-
   const data = {
     titulo: formData.get('titulo')?.toString().trim() ?? '',
     categoria: formData.get('categoria')?.toString() ?? '',
@@ -40,13 +19,22 @@ async function createGaleriaEntry(formData: FormData) {
 
   const parsed = galeriaSchema.parse(data);
 
-  await adminDb.collection('galeria').add({
+  const client = await clientPromise;
+  const dbName = process.env.MONGODB_DB_NAME ?? 'ibvm_db';
+  const db = client.db(dbName);
+
+  const doc = {
     titulo: parsed.titulo,
     categoria: parsed.categoria,
-    imagemUrl: parsed.imagemUrl,
-    createdAt: Timestamp.now(),
-    createdBy: decodedToken.uid,
-  });
+    url: parsed.imagemUrl,
+    data: new Date(),
+  };
+
+  const result = await db.collection('fotos').insertOne(doc);
+
+  if (!result.acknowledged) {
+    throw new Error('Falha ao inserir documento no MongoDB.');
+  }
 
   revalidatePath('/galeria');
 
