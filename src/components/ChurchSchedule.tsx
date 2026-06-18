@@ -12,7 +12,6 @@ export default function ChurchSchedule() {
   ]
 
   return (
-    <section className="py-20 bg-white">
       <div className="container mx-auto px-6 max-w-5xl">
         
         {/* --- AGENDA DE CULTOS (TOPO) --- */}
@@ -27,26 +26,43 @@ export default function ChurchSchedule() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-20">
+        {/* --- DESIGN IMPONENTE INSPIRADO NA IMAGEM DE REFERÊNCIA --- */}
+        <div className="flex flex-col space-y-0 mb-20 max-w-3xl mx-auto">
           {horarios.map((item, index) => (
             <div 
               key={index} 
-              className={`flex items-center justify-between p-6 rounded-2xl border transition-all duration-300
-                ${item.destaque 
-                  ? 'bg-[#3D2B1F] border-[#3D2B1F] text-white shadow-xl scale-[1.02] z-10' 
-                  : 'bg-[#FCF9F6] border-[#F0E6D2] hover:border-[#B5A478]'}
+              className={`flex flex-col md:flex-row md:items-start justify-between py-8 border-b border-[#F0E6D2] transition-all duration-300
+                ${item.destaque ? 'bg-[#3D2B1F]/5 px-6 rounded-2xl border-b-transparent my-2' : 'hover:bg-[#FCF9F6]/80 px-2'}
               `}
             >
-              <div>
-                <span className={`text-xs font-black uppercase tracking-widest mb-1 block ${item.destaque ? 'text-[#B5A478]' : 'text-[#B5A478]'}`}>
-                  {item.dia}
-                </span>
-                <h3 className="font-bold text-lg leading-tight">{item.evento}</h3>
+              {/* Dia da Semana - Grande, Peso Máximo e Caixa Alta igual ao encarte */}
+              <div className="md:w-1/3 mb-2 md:mb-0">
+                <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-[#3D2B1F]">
+                  {item.dia.replace("-feira", "")}
+                </h3>
               </div>
               
-              <div className="flex items-center gap-2 font-mono font-bold text-xl ml-4 whitespace-nowrap">
-                <Clock size={18} className={item.destaque ? 'text-[#B5A478]' : 'text-[#3D2B1F]'} />
-                {item.hora}
+              {/* Informações do Culto - Corrido e elegante como o texto descritivo da imagem */}
+              <div className="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-4 md:pl-6">
+                <div className="flex items-baseline gap-2 font-serif italic text-lg md:text-xl text-[#533928]">
+                  <span className="font-sans not-italic font-medium text-base md:text-lg text-[#8C7A6B] min-w-[70px]">
+                    {item.hora}
+                  </span>
+                  <span className="text-[#8C7A6B]">—</span>
+                  <span className="font-sans not-italic font-semibold text-[#3D2B1F]">
+                    {item.evento}
+                  </span>
+                </div>
+
+                {/* Ícone ou Badge Indicador Minimalista */}
+                <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#B5A478]">
+                  <Clock size={16} className="text-[#B5A478]" />
+                  {item.destaque && (
+                    <span className="bg-[#3D2B1F] text-white text-[10px] px-2 py-0.5 rounded font-sans tracking-normal font-medium">
+                      Destaque
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -78,8 +94,6 @@ export default function ChurchSchedule() {
           ABRIR NO GOOGLE MAPS
         </button>
       </div>
-
-      </div>
-    </section>
+    </div>
   )
 }
