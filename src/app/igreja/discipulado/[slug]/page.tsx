@@ -1,13 +1,18 @@
-export default async function DynamicPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  
-  // Limpa o nome para exibição (ex: o-que-e-o-batismo vira O QUE E O BATISMO)
-  const titulo = slug.replace(/-/g, ' ').toUpperCase();
 
-  return (
-    <main className="min-h-screen pt-40 px-10 bg-[#fffbf6]">
-      <h1 className="text-3xl font-bold text-[#3D2B1F]">{titulo}</h1>
-      <p className="mt-4 text-[#8C7A6B]">Página em desenvolvimento.</p>
-    </main>
-  );
+export default function eventos_page() {
+    return (
+        <main className="min-h-screen bg-[#fffbf6] flex items-center justify-center pt-32 pb-20 px-8">
+          <div className="text-center space-y-6 max-w-2xl mx-auto bg-white p-12 rounded-[3rem] shadow-xl border border-[#F0E6D2]">
+            <span className="text-[#B5A478] font-bold tracking-[0.3em] uppercase text-xs">
+              Página em construção  
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold text-[#3D2B1F] capitalize italic">
+              Discipulado
+            </h1>
+            <p className="text-[#8C7A6B] text-lg">
+              A página com o design exclusivo deste ministério está sendo desenvolvida e estará disponível em breve!
+            </p>
+          </div>
+        </main>
+      )
 }
