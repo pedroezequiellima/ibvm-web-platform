@@ -62,9 +62,9 @@ export default function LoginPage() {
         <div className="mt-8 rounded-2xl bg-[#FCF9F6] p-4 text-sm text-[#8C7A6B]">
           <p className="font-medium text-[#3D2B1F]">Segurança:</p>
           <ul className="mt-3 space-y-2">
-            <li>• O token Firebase é enviado ao servidor.</li>
-            <li>• O servidor cria um cookie HttpOnly de sessão.</li>
-            <li>• O middleware protege `/admin`.</li>
+            <li>• O acesso é restrito a usuários autenticados.</li>
+            <li>• Os dados do usuário são protegidos.</li>
+            <li>• Jesus te ama.</li>
           </ul>
         </div>
       </section>
