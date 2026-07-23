@@ -1,122 +1,161 @@
 'use client'
-import { Wind, Heart, Phone, Image as ImageIcon } from 'lucide-react'
-import Image from 'next/image'
 
-// Link do WhatsApp da Igreja (Substitua pelo número real)
-const WHATSAPP_LINK = "https://wa.me/5587900000000?text=Olá,%20gostaria%20de%20doar%20alimentos%20para%20a%20Ação%20Social%20da%20IBVM."
+import { useState } from 'react'
+import { Heart, Copy, QrCode, Landmark, CheckCircle2, BookOpen } from 'lucide-react'
 
-export default function OfertasPage() {
+export default function Ofertas() {
+  const [copiedPix, setCopiedPix] = useState(false)
+
+  const pixKey = "CNPJ: 00.000.000/0000-00" // Substitua pela chave PIX real da igreja
+
+  const handleCopyPix = () => {
+    navigator.clipboard.writeText(pixKey)
+    setCopiedPix(true)
+    setTimeout(() => setCopiedPix(false), 3000)
+  }
+
   return (
-    <main className="w-full max-w-1440px mx-auto px-4 sm:px-8 md:px-12 lg:px-20 min-h-screen pt-32 pb-20">
+    <div className="relative min-h-screen bg-[#FCF9F6] py-20 px-4 md:px-8 overflow-hidden">
+      
+      {/* --- BACKGROUND DECORATIVO (NOVIDADE) --- */}
+      <div className="absolute inset-0 pointer-events-none select-none z-0">
+        {/* Linhas de Grade Douradas Sutis */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#B5A47815_1px,transparent_1px),linear-gradient(to_bottom,#B5A47815_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        
+        {/* Brilho Superior */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#B5A478]/10 via-[#FCF9F6]/0 to-transparent"></div>
 
-      {/* CABEÇALHO DA PÁGINA */}
-      <div className="text-center mb-16 max-w-2xl mx-auto">
-        <h1 className="text-5xl font-serif italic text-[#3D2B1F] mb-6 uppercase tracking-tight">
-          Nossas <span className="text-[#B5A478]">Campanhas</span>
-        </h1>
-        <p className="text-[#8C7A6B] text-lg leading-relaxed">
-          Juntos podemos mais. Suas ofertas e doações são fundamentais para o avanço do Reino e o cuidado com o próximo na Vila Marcela.
-        </p>
-      </div>
-
-      <div className="space-y-24">
-
-        {/* --- CAMPANHA 1: CLIMATIZAÇÃO --- */}
-        <section className="bg-[#FCF9F6] p-10 rounded-[3rem] border border-[#F0E6D2] shadow-sm relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-10 opacity-10">
-            <Wind size={120} color="#3D2B1F" />
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative z-10">
-            {/* Texto */}
-            <div className="md:col-span-7 space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-[#FCF9F6] rounded-2xl text-[#B5A478]">
-                </div>
-                <h2 className="text-3xl font-bold text-[#3D2B1F] uppercase tracking-tight">Campanha da Climatização</h2>
-              </div>
-              <p className="text-[#8C7A6B] leading-relaxed">
-                Nossos cultos de louvor e adoração merecem o conforto de um ambiente climatizado. Estamos em campanha para a aquisição e instalação de novos ares-condicionados para o templo. Sua oferta especial trará mais conforto e dignidade para nossa congregação.
-              </p>
-              
-              {/* ESPAÇO PARA DADOS BANCÁRIOS / PIX */}
-              <div className="bg-[#FCF9F6] p-6 rounded-2xl border border-[#F0E6D2] space-y-3">
-                <p className="text-sm font-sans text-[#3D2B1F] uppercase">Conta para Oferta (PIX):</p>
-                <div className="flex items-center gap-3 text-[#3D2B1F] font-mono text-xl font-bold bg-white p-4 rounded-xl shadow-inner break-all">
-                  26.242.258/0001-98
-                </div>
-                <p className="text-xs font-roboto text-[#8C7A6B]">Identifique sua transferência como: &quot;Campanha Climatização&quot;.</p>
-              </div>
-            </div>
-
-            {/* ESPAÇO PARA O BANNER DA IMAGEM */}
-            <div className="md:col-span-5 relative aspect-16/10 bg-gray-100 rounded-[2rem] overflow-hidden group cursor-pointer border-4 border-white shadow-lg">
-              {/* REMOVA ESTE PLACEHOLDER E USE O Image DO NEXT.JS QUANDO TIVER O BANNER */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-[#8C7A6B]/50 gap-2">
-                <ImageIcon size={48} />
-                <span className="text-sm">Clique para ver o Banner</span>
-              </div>
-               <Image src="/clima.jpg" alt="Banner Climatização" fill className="object-cover group-hover:scale-105 transition-transform" />
-              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-all" />
-            </div>
-          </div>
-        </section>
-
-
-        {/* --- CAMPANHA 2: DOAÇÃO DE ALIMENTOS --- */}
-        <section className="bg-[#FCF9F6] p-10 rounded-[3rem] border border-[#F0E6D2] relative -mx-4 sm:-mx-8 md:-mx-12 lg:-mx-20">
-          <div className="px-4 sm:px-8 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            
-           
-           {/* ESPAÇO PARA FOTO ESTILOSA (Esquerda) */}
-        <div className="md:col-span-5 relative aspect-square bg-white rounded-[3rem] overflow-hidden shadow-2xl border-[8px] border-white group">
-  
-           {/* IMAGEM CORRIGIDA: 
-            - h-full e w-full garantem o preenchimento.
-            - object-cover evita que a foto fique "esticada".
-            - group-hover dá o efeito de movimento ao passar o mouse.
-            */}
-        <Image src="/lideresacao.jpg" alt="Ação Social IBVM" fill className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-
-        {/* Overlay de gradiente para dar profundidade (Z-index 10) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10 pointer-events-none" />
+        {/* Cruz Minimalista (Marca d'água Topo Direita) */}
+        <div className="absolute top-20 right-[-10%] md:right-10 opacity-[0.08] text-[#B5A478] transform rotate-12 transition-transform duration-1000 hover:rotate-0">
+          <svg width="240" height="320" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2v20M5 8h14" />
+          </svg>
         </div>
 
-            {/* Texto e Ação (Direita) */}
-            <div className="md:col-span-7 space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-white rounded-2xl text-[#3D2B1F] shadow-inner">
-                   <Heart size={28} />
-                </div>
-                <h2 className="text-3xl font-bold text-[#3D2B1F] uppercase tracking-tight">Doação de Alimentos (Ação Social)</h2>
-              </div>
-              <p className="text-[#8C7A6B] leading-relaxed">
-                A IBVM tem o compromisso de cuidar da comunidade. Arrecadamos alimentos não perecíveis para a formação de cestas básicas que são distribuídas às famílias em situação de vulnerabilidade na Vila Marcela. Sua doação é um ato de amor em ação.
-              </p>
-              
-              <div className="space-y-4">
-                <p className="text-sm font-bold text-[#3D2B1F]">Onde entregar?</p>
-                <p className="text-[#8C7A6B] text-sm">No templo, durante os cultos ou diretamente no balcão da Ação Social.</p>
-              </div>
+        {/* Bíblia Aberta (Marca d'água Base Esquerda) */}
+        <div className="absolute bottom-20 left-[-10%] md:left-10 opacity-[0.06] text-[#B5A478] transform -rotate-12 transition-transform duration-1000 hover:rotate-0">
+          <BookOpen size={280} strokeWidth={0.5} />
+        </div>
+      </div>
+      {/* --- FIM DO BACKGROUND --- */}
 
-              {/* Botão de Contato Rápido para Doação */}
-              <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                <button onClick={() => window.open(WHATSAPP_LINK, '_blank')}
-                className="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold text-sm flex items-center justify-center gap-3 hover:bg-[#128C7E] transition-all shadow-lg hover:-translate-y-1">
-                {/* O seu SVG do WhatsApp */}
-                <svg className="w-6 h-6 fill-white" viewBox="0 0 360 362">
-                  <path d="M307.546 52.566C273.709 18.684 228.706.017 180.756 0 81.951 0 1.538 80.404 1.504 179.235c-.017 31.594 8.242 62.432 23.928 89.609L0 361.736l95.024-24.925c26.179 14.285 55.659 21.805 85.655 21.814h.077c98.788 0 179.21-80.413 179.244-179.244.017-47.898-18.608-92.926-52.454-126.807v-.008Zm-126.79 275.788h-.06c-26.73-.008-52.952-7.194-75.831-20.765l-5.44-3.231-56.391 14.791 15.05-54.981-3.542-5.638c-14.912-23.721-22.793-51.139-22.776-79.286.035-82.14 66.867-148.973 149.051-148.973 39.793.017 77.198 15.53 105.328 43.695 28.131 28.157 43.61 65.596 43.593 105.398-.035 82.149-66.867 148.982-148.982 148.982v.008Zm81.719-111.577c-4.478-2.243-26.497-13.073-30.606-14.568-4.108-1.496-7.09-2.243-10.073 2.243-2.982 4.487-11.568 14.577-14.181 17.559-2.613 2.991-5.226 3.361-9.704 1.117-4.477-2.243-18.908-6.97-36.02-22.226-13.313-11.878-22.304-26.54-24.916-31.027-2.613-4.486-.275-6.91 1.959-9.136 2.011-2.011 4.478-5.234 6.721-7.847 2.244-2.613 2.983-4.486 4.478-7.469 1.496-2.991.748-5.603-.369-7.847-1.118-2.243-10.073-24.289-13.812-33.253-3.636-8.732-7.331-7.546-10.073-7.692-2.613-.13-5.595-.155-8.586-.155-2.991 0-7.839 1.118-11.947 5.604-4.108 4.486-15.677 15.324-15.677 37.361s16.047 43.344 18.29 46.335c2.243 2.991 31.585 48.225 76.51 67.632 10.684 4.615 19.029 7.374 25.535 9.437 10.727 3.412 20.49 2.931 28.208 1.779 8.604-1.289 26.498-10.838 30.228-21.298 3.73-10.46 3.73-19.433 2.613-21.298-1.117-1.865-4.108-2.991-8.586-5.234l.008-.017Z" />
-                </svg>AGENDAR COLETA
-                </button>
-                <div className="flex items-center gap-3 text-[#064E3B] font-mono text-lg p-4 bg-[#ECFDF5] border border-[#A7F3D0] rounded-full shadow-inner">
-                <Phone size={18} className="text-[#059669]" /> (87) 9 9994-0313
+      {/* CONTEÚDO PRINCIPAL (Envolvido em z-10 para ficar acima do fundo) */}
+      <div className="relative z-10 max-w-4xl mx-auto">
+        
+        {/* --- CABEÇALHO E VERSÍCULO --- */}
+        <div className="text-center mb-16">
+          <div className="flex justify-center mb-6">
+            <div className="bg-[#3D2B1F]/5 p-4 rounded-full backdrop-blur-sm">
+              <Heart className="text-[#B5A478]" size={40} strokeWidth={1.5} />
+            </div>
+          </div>
+          
+          <h1 className="text-4xl md:text-5xl font-serif text-[#3D2B1F] italic tracking-tight mb-6 relative inline-block">
+            Adoração através da <span className="font-sans not-italic font-light text-[#8C7A6B]">Generosidade</span>
+          </h1>
+
+          {/* Citação Bíblica em Destaque */}
+          <blockquote className="relative max-w-2xl mx-auto p-8 rounded-3xl bg-white/80 backdrop-blur-md border border-[#F0E6D2] shadow-sm">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FCF9F6] px-4 text-[#B5A478] font-serif text-4xl">
+              "
+            </div>
+            <p className="text-lg md:text-xl text-[#533928] leading-relaxed font-serif italic mb-4">
+              Cada um contribua segundo propôs no seu coração; não com tristeza, ou por necessidade; porque Deus ama ao que dá com alegria.
+            </p>
+            <footer className="text-sm font-sans font-bold tracking-widest uppercase text-[#B5A478]">
+              2 Coríntios 9:7
+            </footer>
+          </blockquote>
+        </div>
+
+        {/* --- OPÇÕES DE CONTRIBUIÇÃO --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          
+          {/* Card PIX */}
+          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-[2rem] border border-[#F0E6D2] shadow-xl shadow-[#3D2B1F]/5 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#B5A478]/5 rounded-bl-full -z-10 transition-transform group-hover:scale-110" />
+            
+            <div className="flex items-center gap-3 mb-6">
+              <QrCode className="text-[#B5A478]" size={28} />
+              <h3 className="text-2xl font-bold text-[#3D2B1F]">PIX</h3>
+            </div>
+            
+            <p className="text-[#8C7A6B] mb-6 line-clamp-2">
+              A forma mais rápida e prática de contribuir. Escaneie o QR Code ou copie a chave abaixo.
+            </p>
+
+            <div className="bg-[#FCF9F6] p-4 rounded-xl border border-[#F0E6D2] flex items-center justify-between gap-4 mb-4">
+              <span className="font-mono text-sm md:text-base font-medium text-[#533928] truncate">
+                {pixKey}
+              </span>
+              <button 
+                onClick={handleCopyPix}
+                className="p-2 hover:bg-[#EAE2D6] rounded-lg transition-colors flex-shrink-0"
+                title="Copiar Chave PIX"
+              >
+                {copiedPix ? (
+                  <CheckCircle2 className="text-green-600" size={20} />
+                ) : (
+                  <Copy className="text-[#B5A478]" size={20} />
+                )}
+              </button>
+            </div>
+            
+            {copiedPix && (
+              <p className="text-xs text-green-600 font-medium text-center animate-pulse">
+                Chave PIX copiada com sucesso!
+              </p>
+            )}
+          </div>
+
+          {/* Card Transferência Bancária */}
+          <div className="bg-[#3D2B1F]/95 backdrop-blur-sm p-8 rounded-[2rem] shadow-xl text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-full -z-0" />
+            
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-6">
+                <Landmark className="text-[#B5A478]" size={28} />
+                <h3 className="text-2xl font-bold">Conta Bancária</h3>
+              </div>
+              
+              <p className="text-gray-300 mb-6">
+                Para transferências via TED, DOC ou depósitos direto na conta da igreja.
+              </p>
+
+              <div className="space-y-3 text-sm font-mono bg-white/5 p-5 rounded-xl border border-white/10">
+                <div className="flex justify-between border-b border-white/10 pb-2">
+                  <span className="text-gray-400">Banco</span>
+                  <span className="font-semibold">000 - Nome do Banco</span>
+                </div>
+                <div className="flex justify-between border-b border-white/10 pb-2">
+                  <span className="text-gray-400">Agência</span>
+                  <span className="font-semibold">0000</span>
+                </div>
+                <div className="flex justify-between border-b border-white/10 pb-2">
+                  <span className="text-gray-400">Conta</span>
+                  <span className="font-semibold">00000-0</span>
+                </div>
+                <div className="flex justify-between pt-1">
+                  <span className="text-gray-400">Favorecido</span>
+                  <span className="font-semibold truncate max-w-[120px]">Igreja Batista Vila Marcela</span>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+
+        </div>
+
+        {/* --- MENSAGEM FINAL --- */}
+        <div className="mt-16 text-center text-[#8C7A6B] max-w-xl mx-auto">
+          <p>
+            Sua fidelidade e generosidade permitem que a obra do Senhor continue avançando, abençoando vidas e transformando nossa comunidade.
+          </p>
+          <p className="mt-2 font-bold text-[#3D2B1F]">
+            Muito obrigado por fazer parte disso!
+          </p>
+        </div>
 
       </div>
-    </main>
+    </div>
   )
 }
