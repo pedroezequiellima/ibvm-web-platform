@@ -26,16 +26,16 @@ interface GrupoConexao {
 const gcData: Record<string, GrupoConexao> = {
   "gc-loteamento-recife": {
     bairro: "Loteamento Recife",
-    dia: "Quarta-feira",
-    hora: "19:30",
+    dia: "Terça-feira",
+    hora: "20:00",
     enderecoResumido: "Bairro Loteamento Recife",
     versiculo: "A tua palavra é lâmpada que ilumina os meus passos e luz que clareia o meu caminho.",
     referencia: "Salmos 119:105",
     descricao: "O GC Loteamento Recife é uma extensão da nossa família espiritual. Mais do que uma reunião, é um lar onde compartilhamos nossas alegrias, choramos as dores uns dos outros e mergulhamos juntos na Palavra de Deus. Se você busca conexões reais e crescimento espiritual, seu lugar é aqui.",
     fotoBanner: "/FamiliaIbvm.jpg",
     corDestaque: "[#A98054]", // Dourado suave
-    lideres: { nome: "João e Maria", foto: "/lideresacao.jpg" },
-    viceLideres: { nome: "Carlos e Sara", foto: "/lideresacao.jpg" }
+    lideres: { nome: "Gregório e Marília", foto: "/lideresacao.jpg" },
+    viceLideres: { nome: "Equipe de Apoio", foto: "/lideresacao.jpg" }
   },
   "gc-vila-marcela": {
     bairro: "Vila Marcela",
@@ -47,11 +47,37 @@ const gcData: Record<string, GrupoConexao> = {
     descricao: "No coração da Vila Marcela, somos uma comunidade viva que busca viver os princípios da igreja de Atos. Nossos encontros são um oásis no meio da semana: um tempo para parar, abrir as Escrituras, orar com fervor e experimentar o amor de Cristo na prática.",
     fotoBanner: "/FamiliaIbvm.jpg",
     corDestaque: "[#C2A88D]", // Terracota suave
-    lideres: { nome: "Pedro e Ana", foto: "/lideresacao.jpg" },
-    viceLideres: { nome: "Tiago e Rute", foto: "/lideresacao.jpg" }
+    lideres: { nome: "Pr. Walston e Neurismar", foto: "/lideresacao.jpg" },
+    viceLideres: { nome: "Pr. Marcos e Equipe", foto: "/lideresacao.jpg" }
   },
-  // Adicione outros GCs mantendo a estrutura...
+  "gc-padre-cicero": {
+    bairro: "Padre Cícero",
+    dia: "Terça-feira",
+    hora: "20:00",
+    enderecoResumido: "Bairro Padre Cícero",
+    versiculo: "Oh! Quão bom e quão suave é que os irmãos vivam em união.",
+    referencia: "Salmos 133:1",
+    descricao: "O GC Padre Cícero é um ponto de encontro e fortalecimento para as famílias do bairro. Buscamos viver o evangelho de maneira simples e acolhedora, com espaço para oração, estudo bíblico prático e comunhão verdadeira entre os membros.",
+    fotoBanner: "/FamiliaIbvm.jpg",
+    corDestaque: "[#A98054]", // Dourado suave
+    lideres: { nome: "Lucas e Edneia", foto: "/lideresacao.jpg" },
+    viceLideres: { nome: "Liderança Local", foto: "/lideresacao.jpg" }
+  },
+  "gc-dom-avelar": {
+    bairro: "Dom Avelar",
+    dia: "Terça-feira",
+    hora: "20:00",
+    enderecoResumido: "Bairro Dom Avelar",
+    versiculo: "Assim como os ferros se afiam uns aos outros, o homem afia o seu próximo.",
+    referencia: "Provérbios 27:17",
+    descricao: "No GC Dom Avelar, nosso objetivo é o crescimento mútuo e o discipulado de perto. Um ambiente seguro para tirar dúvidas da Palavra, fortalecer a fé e edificar a liderança e o serviço na igreja local.",
+    fotoBanner: "/FamiliaIbvm.jpg",
+    corDestaque: "[#C2A88D]", // Terracota suave
+    lideres: { nome: "Mário Rosas", foto: "/lideresacao.jpg" },
+    viceLideres: { nome: "Liderança de Apoio", foto: "/lideresacao.jpg" }
+  }
 };
+
 
 export default async function GCPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
