@@ -48,6 +48,11 @@ const Navbar = () => {
           basePath: '/igreja/doutrinas',
           items: ['Nossas Crenças'] 
         },
+        {
+          title: 'Sobre nós',
+          basePath: '/igreja/sobre',
+          items: ['Sobre nós']
+        }
       ]
     },
     { name: 'MENSAGENS', href: '/mensagens' },
