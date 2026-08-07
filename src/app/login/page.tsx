@@ -33,7 +33,7 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.error('Erro no login com Google:', error);
-      alert('Não foi possível fazer login. Verifique a conexão e tente novamente.');
+      alert('Não foi possível fazer login.');
     }
   }
 
