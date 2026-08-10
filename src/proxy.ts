@@ -1,16 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify, createRemoteJWKSet, type JWTVerifyOptions } from "jose";
 
-export const runtime = "edge";
+
 
 /**
  * CONFIGURAÇÕES
  */
-// Ajustado com o nome do seu cookie de autenticação
 const SESSION_COOKIE_NAME =
   process.env.NEXT_PUBLIC_FIREBASE_SESSION_COOKIE_NAME || "ibvm-auth-cookie";
 
 const FIREBASE_PROJECT_ID = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "";
+
+// ✅ Adicionada a lista de emails permitidos (Whitelist)
+const ALLOWED_EMAILS = [
+  "pedroezequiel.limaf@gmail.com",
+  "igrejabatistavilamarcela@gmail.com",
+];
 
 // JWKS remoto do Firebase/Google
 const FIREBASE_JWKS_URL =
@@ -35,7 +40,7 @@ function redirectToLoginWithCallback(req: NextRequest): NextResponse {
 
 function unauthorizedApiResponse(): NextResponse {
   return NextResponse.json(
-    { error: "Unauthorized", message: "Autenticação necessária." },
+    { error: "Unauthorized", message: "Autenticação necessária ou sem permissão." },
     { status: 401 }
   );
 }
@@ -47,6 +52,7 @@ async function verifySessionCookie(token: string) {
     );
   }
   const opts = getVerifyOptions();
+  // jwtVerify retorna o header e o payload (que contém os dados do usuário, incluindo o email)
   const { payload } = await jwtVerify(token, JWKS, opts);
   return payload;
 }
@@ -54,7 +60,7 @@ async function verifySessionCookie(token: string) {
 /**
  * Middleware Principal
  */
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   try {
     // 1) Verificar presença do cookie
     const cookie = req.cookies.get(SESSION_COOKIE_NAME);
@@ -67,10 +73,28 @@ export async function middleware(req: NextRequest) {
       return redirectToLoginWithCallback(req);
     }
 
-    // 2) Validação do JWT com Firebase JWKS
+    // 2) Validação do JWT com Firebase JWKS e verificação de Email
     try {
-      await verifySessionCookie(sessionToken);
+      const payload = await verifySessionCookie(sessionToken);
+      
+      // ✅ Extrai o email do payload do token do Firebase
+      const userEmail = payload.email as string | undefined;
+
+      // ✅ Verifica se o email existe e se está na nossa lista de permitidos
+      if (!userEmail || !ALLOWED_EMAILS.includes(userEmail)) {
+        console.log(`Acesso bloqueado no middleware para o email: ${userEmail || 'desconhecido'}`);
+        
+        if (req.nextUrl.pathname.startsWith("/api/")) {
+          return unauthorizedApiResponse();
+        }
+        
+        // Se o email não for um dos dois, joga de volta pro login
+        return redirectToLoginWithCallback(req); 
+      }
+
+      // Se passou por tudo, libera o acesso!
       return NextResponse.next();
+      
     } catch (verifyErr) {
       if (req.nextUrl.pathname.startsWith("/api/")) {
         return unauthorizedApiResponse();
