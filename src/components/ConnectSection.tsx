@@ -5,7 +5,7 @@ import { FaInstagram } from 'react-icons/fa';
 
 const ministerios = [
   { id: 1, nome: 'IBVM Vila Marcela', imagem: '/exemplo.jpg', instagram: 'https://www.instagram.com/igrejabatistavilamarcela/' },
-  { id: 2, nome: 'Vila Jovem', imagem: '/adolescentes/TeensChacara2.jpg', instagram: 'https://www.instagram.com/vilajovem.ibvm/' },
+  { id: 2, nome: 'Vila Jovem', imagem: '/VilaA2.jpg', instagram: 'https://www.instagram.com/vilajovem.ibvm/' },
   { id: 3, nome: 'Vila Teens', imagem: '/adolescentes/TeensChacara.jpg', instagram: 'https://www.instagram.com/vilateensibvm/' },
   { id: 4, nome: 'Vila Kids', imagem: '/infantil/MuitaCria.jpg', instagram: 'https://www.instagram.com/igrejabatistavilamarcela/' },
   { id: 5, nome: 'Igreja', imagem: '/IBVM.jpg', instagram: 'https://www.instagram.com/igrejabatistavilamarcela/' },
