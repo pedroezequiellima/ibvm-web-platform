@@ -41,9 +41,8 @@ export default function Home() {
            <div className="order-1 md:order-2 relative aspect-16/10 w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
            {/* Lembre-se de importar o componente Image do next/image no topo do arquivo */}
            <Image 
-            src="/Familiaibvm.jpg" 
+            src="/FamiliaIbvm.jpg" 
             alt="Igreja Batista Vila Marcela"
-            fill 
             className="object-cover group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, 50vw"
     />

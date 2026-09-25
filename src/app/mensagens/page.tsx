@@ -24,7 +24,7 @@ const mensagensData: Mensagem[] = [
     pregador: 'Pr. Presidente',
     data: '17 Mai 2026',
     // DICA: Mudei para caminhos sem '/public' para o Next.js ler correto
-    thumbnail: "/pastor.jpg", 
+    thumbnail: "/DmMarcos.jpg", 
     url: 'https://youtube.com', 
   },
   {
@@ -33,7 +33,7 @@ const mensagensData: Mensagem[] = [
     playlist: 'Série: Esperança',
     pregador: 'Pr. João',
     data: '14 Mai 2026',
-    thumbnail: '/pastor.jpg', 
+    thumbnail: "/DmWalston.jpg", 
     url: 'https://youtube.com',
   },
   {
@@ -42,7 +42,7 @@ const mensagensData: Mensagem[] = [
     playlist: 'Estudos Bíblicos',
     pregador: 'Pr. Presidente',
     data: '10 Mai 2026',
-    thumbnail: '/pastor.jpg', 
+    thumbnail: "/DmMarcos.jpg", 
     url: 'https://youtube.com',
   },
   {
@@ -61,7 +61,7 @@ const mensagensData: Mensagem[] = [
     playlist: 'Série: Vida em Comunhão',
     pregador: 'Pr. João',
     data: '03 Mai 2026',
-    thumbnail: '/pastor.jpg', 
+    thumbnail: "/DmWalston.jpg", 
     url: 'https://youtube.com',
   },
 ];
