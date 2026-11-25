@@ -6,10 +6,9 @@ import { jwtVerify, createRemoteJWKSet, type JWTVerifyOptions } from "jose";
 /**
  * CONFIGURAÇÕES
  */
-const SESSION_COOKIE_NAME =
-  process.env.NEXT_PUBLIC_FIREBASE_SESSION_COOKIE_NAME || "ibvm-auth-cookie";
+const SESSION_COOKIE_NAME = process.env.NEXT_PUBLIC_FIREBASE_SESSION_COOKIE_NAME;
 
-const FIREBASE_PROJECT_ID = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "";
+const FIREBASE_PROJECT_ID = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 
 // ✅ Adicionada a lista de emails permitidos (Whitelist)
 const ALLOWED_EMAILS = [
@@ -18,8 +17,8 @@ const ALLOWED_EMAILS = [
 ];
 
 // JWKS remoto do Firebase/Google
-const FIREBASE_JWKS_URL =
-  "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
+const FIREBASE_JWKS_URL ="https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
+
 
 const JWKS = createRemoteJWKSet(new URL(FIREBASE_JWKS_URL));
 
@@ -63,6 +62,12 @@ async function verifySessionCookie(token: string) {
 export async function proxy(req: NextRequest) {
   try {
     // 1) Verificar presença do cookie
+    if (!SESSION_COOKIE_NAME) {
+      throw new Error(
+        "SESSION_COOKIE_NAME não configurado. Defina a variável de ambiente NEXT_PUBLIC_FIREBASE_SESSION_COOKIE_NAME."
+      );
+    }
+
     const cookie = req.cookies.get(SESSION_COOKIE_NAME);
     const sessionToken = cookie?.value;
 
